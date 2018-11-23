@@ -6,102 +6,14 @@
     <title>Nice Sites via Maxim Siebert</title>
     <link rel="stylesheet" href="css/all.css">
 </head>
-<style>
-    li:hover .details {
-        opacity: 1;
-    }
-    li:hover .details span {
-        transform: translateY(0);
-    }
-    li:hover img {
-    }
-    img {
-        object-fit: cover;
-        transition: .1s ease-in all;
-    }
-    img:not([src]) {
-        visibility: hidden;
-    }
-    img:not([src]) + .placeholder{ 
-        background: url('img/no-image.png') no-repeat center center;
-        background-color: #000;
-        background-size: cover;
-    }
-    .details {
-        opacity: 0;
-        transition: .1s ease-in all;
-    }
-    .details span {
-        transform: translateY(10%);
-        transition: .1s ease-in all;
-    }
-    .loader:before {
-        content: "/";
-        animation: load .5s linear infinite;
-    }
-
-    @keyframes load {
-        0% {
-            content: "/";
-        }
-
-        25% {
-            content: "–";
-        }
-
-        50% {
-            content: "\005C";
-        }
-
-        75% {
-            content: "|";
-        }
-    }
-    @keyframes fade {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-    @keyframes fade-out {
-        0% {
-            opacity: 1;
-        }
-
-        100% {
-            opacity: 0;
-        }
-    }
-    .fade {
-        opacity: 0;
-    }
-    .fade.active {
-        animation: fade .5s ease-in 1s;
-        animation-fill-mode: forwards;
-    }
-    .fade-out.active {
-        animation: fade-out .5s ease-in 1s;
-        animation-fill-mode: forwards;
-    }
-    .link.b--white-20 {
-        transition: .1s ease-in all;
-    }
-    .link.b--white-20:hover {
-        border-color: #fff;
-        color: #fff;
-    }
-</style>
 <body class="courier white overflow-y-scroll f6">
     <div class="mh4-ns mh2 mt4-ns mt3 relative">
-        <div class="bb b--white-20 flex pb3">
-            <h1 class="ma0 f6 fw4">Nice sites</h1>
+        <div class="flex pb3 nav">
+            <h1 class="ma0 f6 fw4 fade"><span class="count"></span> nice sites</h1>
             <div class="fade-out ml0-ns ml-auto">
                 <div class="loader absolute-ns left--50-ns"></div>
             </div>
-            <p class="ml-auto ma0 f6 db-ns dn">via <a class="link white fw4 hover-white" href="http://maximsiebert.com/" target="_blank">Maxim Siebert</a></p>
+            <p class="ml-auto ma0 f6 db-ns dn fade">via <a class="link white fw4 hover-white" href="http://maximsiebert.com/" target="_blank">Maxim Siebert</a></p>
         </div>
     </div>
     <div id="wrapper">
@@ -138,29 +50,30 @@
 <script>
 $.getJSON("https://maximsiebert.dropmark.com/343445.json", function(data) {
 
-    console.log(data);
 
     var content = {
         data //the JSON data
-      },
+        },
 
-      directive = {
-        'li':{
-            'site<-items':{
-                'span.name': 'site.name',
-                'span.date': 'site.created_at',
-                'a@href': 'site.link',
-                'img.thumbnail@src': 'site.thumbnail',
-            }
-        }
-      };
+        directive = {
+            'li':{
+                'site<-items':{
+                    'span.name': 'site.name',
+                    'span.date': 'site.created_at',
+                    'a@href': 'site.link',
+                    'img.thumbnail@src': 'site.thumbnail',
+                }
+            },
+        };
 
     $p('ul').render(data, directive);
+    $('h1 span').html(data.items_total_count);
 
 
 }).done(function() {
     $('.fade').addClass('active');
     $('.fade-out').addClass('active');
+    $('.nav').addClass('active');
 });
 
 </script>

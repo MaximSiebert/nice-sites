@@ -2043,6 +2043,50 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .debug-grid-16-solid { background: white url( data:image/gif;base64,R0lGODdhEAAQAPEAAADw/wDx/xXy/////ywAAAAAEAAQAAACIZyPKckYDQFsb6ZqD85jZ2+BkwiRFKehhqQCQgDHcgwEBQA7 ) repeat top left; }
 /* Uncomment out the line below to help debug layout issues */
 /* @import './tachyons/_debug'; */
+li:hover .details { opacity: 1; }
+li:hover .details span { -webkit-transform: translateY( 0 ); transform: translateY( 0 ); }
+li:hover img { }
+img { -o-object-fit: cover; object-fit: cover; transition: .1s ease-in all; }
+img:not([src]) { visibility: hidden; }
+img:not([src]) + .placeholder { background: url( 'img/no-image.png' ) no-repeat center center; background-color: #000; background-size: cover; }
+.details { opacity: 0; transition: .1s ease-in all; }
+.details span { -webkit-transform: translateY( 10% ); transform: translateY( 10% ); transition: .1s ease-in all; }
+.loader:before { content: "/"; -webkit-animation: load .5s linear infinite; animation: load .5s linear infinite; }
+@-webkit-keyframes load {
+ 0% { content: "/"; }
+ 25% { content: "–"; }
+ 50% { content: "\005C"; }
+ 75% { content: "|"; }
+}
+@keyframes load {
+ 0% { content: "/"; }
+ 25% { content: "–"; }
+ 50% { content: "\005C"; }
+ 75% { content: "|"; }
+}
+@-webkit-keyframes fade {
+ 0% { opacity: 0; }
+ 100% { opacity: 1; }
+}
+@keyframes fade {
+ 0% { opacity: 0; }
+ 100% { opacity: 1; }
+}
+@-webkit-keyframes fade-out {
+ 0% { opacity: 1; }
+ 100% { opacity: 0; }
+}
+@keyframes fade-out {
+ 0% { opacity: 1; }
+ 100% { opacity: 0; }
+}
+.fade { opacity: 0; }
+.fade.active { -webkit-animation: fade .5s ease-in 1s; animation: fade .5s ease-in 1s; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards; }
+.fade-out.active { -webkit-animation: fade-out .5s ease-in 1s; animation: fade-out .5s ease-in 1s; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards; }
+.link.b--white-20 { transition: .1s ease-in all; }
+.link.b--white-20:hover { border-color: #fff; color: #fff; }
+.nav { border-bottom: 1px solid transparent; transition: .1s ease-in all; transition-delay: 1s; }
+.nav.active { border-color: rgba( 255, 255, 255, .2 ); }
 @media screen and (min-width: 750px) {
  .aspect-ratio-ns { height: 0; position: relative; }
  .aspect-ratio--16x9-ns { padding-bottom: 56.25%; }
