@@ -1,0 +1,167 @@
+<html class="bg-dark-gray" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<style>
+    li:hover .details {
+        opacity: 1;
+    }
+    li:hover .details span {
+        transform: translateY(0);
+    }
+    li:hover img {
+    }
+    img {
+        object-fit: cover;
+        transition: .1s ease-in all;
+    }
+    img:not([src]) {
+        visibility: hidden;
+    }
+    img:not([src]) + .placeholder{ 
+        background: url('img/no-image.png') no-repeat center center;
+        background-color: #000;
+        background-size: cover;
+    }
+    .details {
+        opacity: 0;
+        transition: .1s ease-in all;
+    }
+    .details span {
+        transform: translateY(10%);
+        transition: .1s ease-in all;
+    }
+    .loader:before {
+        content: "/";
+        animation: load .5s linear infinite;
+    }
+
+    @keyframes load {
+        0% {
+            content: "/";
+        }
+
+        25% {
+            content: "–";
+        }
+
+        50% {
+            content: "\005C";
+        }
+
+        75% {
+            content: "|";
+        }
+    }
+    @keyframes fade {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes fade-out {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+    .fade {
+        opacity: 0;
+    }
+    .fade.active {
+        animation: fade .5s ease-in 1s;
+        animation-fill-mode: forwards;
+    }
+    .fade-out.active {
+        animation: fade-out .5s ease-in 1s;
+        animation-fill-mode: forwards;
+    }
+    .link.b--white-20 {
+        transition: .1s ease-in all;
+    }
+    .link.b--white-20:hover {
+        border-color: #fff;
+        color: #fff;
+    }
+</style>
+<body class="courier white overflow-y-scroll f6">
+    <div class="mh4-ns mh2 mt4-ns mt3 relative">
+        <div class="bb b--white-20 flex pb3">
+            <h1 class="ma0 f6 fw4">Nice sites</h1>
+            <div class="fade-out ml0-ns ml-auto">
+                <div class="loader absolute-ns left--50-ns"></div>
+            </div>
+            <p class="ml-auto ma0 f6 db-ns dn">by <a class="link white fw4 hover-white" href="http://maximsiebert.com/" target="_blank">Maxim Siebert</a></p>
+        </div>
+    </div>
+    <div id="wrapper">
+        <!-- <ul class="list ma0 ph3-ns ph1 pt3 flex flex-wrap w-100 relative"> -->
+        <ul class="list ma0 ph3-ns ph1 w-100 relative">
+            <!-- <li class="w-20-l w-50 flex pa3-ns pa1 fade">
+                <a class="link white db w-100 relative overflow-hidden bg-mid-gray" href="" target="_blank">
+                    <img class="thumbnail h5 z-1 relative w-100" src="" alt="">
+                    <div class="placeholder absolute--fill absolute"></div>
+                    <div class="details absolute absolute--fill bg-black-40 flex items-end pa3 z-1">
+                        <span class="name word-wrap db"></span>
+                    </div>
+                </a>
+            </li> -->
+            <li class="w-100 flex ph3-ns ph1 fade">
+                <a class="link db w-100 relative overflow-hidden flex items-center bb b--white-20 pv3-ns pv1" href="" target="_blank">
+                    <div class="w3-ns w2 relative">
+                        <img class="thumbnail h3-ns h2 z-1 relative w-100" src="" alt="">
+                        <div class="placeholder absolute--fill absolute"></div>
+                    </div>
+                    <div class="pa3 z-1">
+                        <span class="name word-wrap db"></span>
+                    </div>
+                    <div class="z-1 ml-auto db-ns dn">
+                        <span class="date word-wrap db"></span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/pure.min.js"></script>
+<script>
+$.getJSON("https://maximsiebert.dropmark.com/343445.json", function(data) {
+
+    console.log(data);
+
+    var content = {
+        data //the JSON data
+      },
+
+      directive = {
+        'li':{
+            'site<-items':{
+                'span.name': 'site.name',
+                'span.date': 'site.created_at',
+                'a@href': 'site.link',
+                'img.thumbnail@src': 'site.thumbnail',
+            }
+        }
+      };
+
+    $p('ul').render(data, directive);
+
+
+}).done(function() {
+    $('.fade').addClass('active');
+    $('.fade-out').addClass('active');
+});
+
+</script>
+</html>
