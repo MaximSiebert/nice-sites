@@ -872,8 +872,8 @@ code, .code { font-family: Consolas, monaco, monospace; }
    Docs: http://tachyons.io/docs/elements/links/
 
 */
-.link { text-decoration: none; transition: color .15s ease-in; color: #fff; }
-.link:link, .link:visited { color: rgba( 255, 255, 255, .6 ); }
+.link { text-decoration: none; transition: color .15s ease-in; color: rgba( 255, 255, 255, .6 ); }
+.link:link, .link:visited { color: rgba( 255, 255, 255, .4 ); }
 /*
 
    LISTS
