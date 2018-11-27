@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="css/all.css">
 </head>
 <body class="courier white overflow-y-scroll f6">
-    <div class="mh4-ns mh2 mt4-ns mt3 relative">
-        <div class="flex pb3 nav">
-            <h1 class="ma0 f6 fw4 fade"><span class="count"></span> nice sites</h1>
-            <div class="fade-out">
-                <div class="loader absolute left--50"></div>
+    <nav class="fixed w-100 z-1 bg-dark-gray">
+        <div class="mh4-ns mh2 mt4-ns mt3 relative">
+            <div class="flex pb3 nav">
+                <h1 class="ma0 f6 fw4 fade"><span class="count"></span> nice sites</h1>
+                <div class="fade-out">
+                    <div class="loader absolute left--50"></div>
+                </div>
+                <p class="ml-auto ma0 f6 fade">via <a class="link white fw4 hover-white" href="http://maximsiebert.com/" target="_blank">Maxim <span class="dib-ns dn">Siebert</span></a></p>
             </div>
-            <p class="ml-auto ma0 f6 fade">via <a class="link white fw4 hover-white" href="http://maximsiebert.com/" target="_blank">Maxim <span class="dib-ns dn">Siebert</span></a></p>
         </div>
-    </div>
-    <div id="wrapper">
+    </nav>
+    <div id="wrapper" class="pt5">
         <!-- <ul class="list ma0 ph3-ns ph1 pt3 flex flex-wrap w-100 relative"> -->
         <ul class="list ma0 ph3-ns ph1 w-100 relative mb3">
             <!-- <li class="w-20-l w-50 flex pa3-ns pa1 fade">
@@ -78,6 +80,30 @@ $.getJSON("https://maximsiebert.dropmark.com/343445.json", function(data) {
     $('.fade').addClass('active');
     $('.fade-out').addClass('active');
     $('.nav').addClass('active');
+});
+
+
+$(document).ready(function () {
+  
+  'use strict';
+  
+   var c, currentScrollTop = 0,
+       navbar = $('nav');
+
+   $(window).scroll(function () {
+      var a = $(window).scrollTop();
+      var b = navbar.height();
+     
+      currentScrollTop = a;
+     
+      if (c < currentScrollTop && a > b + b) {
+        navbar.addClass("scrollUp");
+      } else if (c > currentScrollTop && !(a <= b)) {
+        navbar.removeClass("scrollUp");
+      }
+      c = currentScrollTop;
+  });
+  
 });
 
 </script>

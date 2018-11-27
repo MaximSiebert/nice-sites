@@ -111,7 +111,7 @@ img:not([src]) {
     visibility: hidden;
 }
 img:not([src]) + .placeholder{ 
-    background: url('img/no-image.png') no-repeat center center;
+    background: url('../img/no-image.png') no-repeat center center;
     background-color: #000;
     background-size: cover;
 }
@@ -185,7 +185,17 @@ img:not([src]) + .placeholder{
     border-bottom: 1px solid transparent;
     transition: .1s ease-in all;
     transition-delay: 1s;
+    opacity: 1;
 }
 .nav.active {
     border-color: rgba(255,255,255,.2);
+}
+.scrollUp {
+  opacity: 0;
+  transform: translateY(-65px);
+}
+nav {
+    transition: .3s ease-in all;
+    opacity: 1;
+    transform: translateY(0);
 }
